@@ -1,0 +1,5 @@
+struct ByteVectorStamped {
+    int64_t utime;
+    int64_t ndata;
+    byte data[ndata];
+}
