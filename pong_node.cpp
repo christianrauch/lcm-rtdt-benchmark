@@ -1,6 +1,8 @@
 #include <lcm/lcm-cpp.hpp>
 #include <ByteVectorStamped.hpp>
 
+#include <iostream>
+
 class PingResponse {
 public:
     void onPing(const lcm::ReceiveBuffer* /*rbuf*/, const std::string& /*channel*/,  const ByteVectorStamped* ping) {
@@ -29,7 +31,11 @@ private:
 int main(/*int argc, char *argv[]*/) {
     PingResponse ping_response;
 
-    ping_response.setup();
-
-    ping_response.run();
+    if(ping_response.setup()) {
+        ping_response.run();
+    }
+    else {
+        std::cerr << "error in LCM setup, exit" << std::endl;
+        exit(EXIT_FAILURE);
+    }
 }

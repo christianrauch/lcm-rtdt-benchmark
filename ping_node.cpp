@@ -50,7 +50,11 @@ private:
 int main(/*int argc, char *argv[]*/) {
     DelayPub delay_pub;
 
-    delay_pub.setup();
-
-    delay_pub.run();
+    if(delay_pub.setup()) {
+        delay_pub.run();
+    }
+    else {
+        std::cerr << "error in LCM setup, exit" << std::endl;
+        exit(EXIT_FAILURE);
+    }
 }
